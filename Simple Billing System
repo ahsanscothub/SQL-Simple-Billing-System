@@ -1,0 +1,43 @@
+DROP DATABASE IF EXISTS BILLING_SYSTEM;
+Create database BILLING_SYSTEM;
+use BILLING_SYSTEM;
+-- Create table for customers
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Phone VARCHAR(20),
+    Address VARCHAR(255)
+);
+
+-- Create table for products
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Price DECIMAL(10, 2)
+);
+
+-- Create table for orders
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    TotalAmount DECIMAL(10, 2),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+-- Create table for order items
+CREATE TABLE OrderItems (
+    OrderItemID INT PRIMARY KEY,
+    OrderID INT,
+    ProductID INT,
+    Quantity INT,
+    Price DECIMAL(10, 2),
+    Total DECIMAL(10, 2),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+select * from Orders;
+select * from Customers;
+select * from Products;
+select * from OrderItems;
